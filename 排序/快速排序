@@ -1,0 +1,40 @@
+//三数取中法:保证每一次划分均衡
+int getMid(int* a, int left, int right)
+{
+	int mid = left + (right - left) / 2;
+	if (a[mid] > a[left])
+	{
+		if (a[mid] < a[right])
+		{
+			return mid;
+		}
+		else
+		{
+			//mid>left, right
+			if (a[left] > a[right])
+			{
+				return left;
+			}
+			else
+				return right;
+		}
+	}
+	else
+	{
+		//mid <= left
+		if (a[left] < a[right])
+		{
+			return left;
+		}
+		else
+		{
+			//left >= right, mid
+			if (a[mid] > a[right])
+			{
+				return mid;
+			}
+			else
+				return right;
+		}
+	}
+}
