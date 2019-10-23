@@ -1,0 +1,15 @@
+void PrintArray(int* a, int n)
+{
+	for (int i = 0; i < n;++i)
+	{
+		printf("%d ", a[i]);
+	}
+	printf("\n");
+}
+ 
+void Swap(int*a, int*b)
+{
+	int tmp=*a;
+	*a = *b;
+	*b = tmp;
+}
