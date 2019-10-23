@@ -1,0 +1,54 @@
+void ShiftDown(int* a, int n, int root)
+{
+	assert(a);
+	int parent = root;
+	int child = 2 * parent + 1;//定义左孩子
+	//当前节点是否有孩子
+	while (child <n)
+	{
+		//是否有右孩子 如果左孩子存在,选出孩子中最大的那个
+		if (child + 1 < n && a[child + 1] > a[child])//左孩子存在且左孩子大于右孩子
+			++child;//更新孩子索引
+		if (a[child]>a[parent])//判断孩子中最大的节点和父亲节点的关系  如果大于
+		{
+			//进行交换
+			Swap(&a[child], &a[parent]);//传址调用
+			//更新下一次调整位置
+			parent = child;
+			child = 2 * parent + 1;
+		}
+		//如果小于 结束此次调整
+		else
+		{
+			break;//以parent为根的子树已经是一个大堆了
+		}
+	}
+}
+ 
+void HeapSort(int*a, int n)
+{
+	int i;
+	//建堆  从最后一颗子树开始: (n - 2)/2   i:表示当前子树的根
+	for (i = (n - 2) / 2; i >= 0; --i)
+	{
+		ShiftDown(a, n, i);
+	}
+	//排序: 1.swap    2. shiftdown
+	int end = n - 1;
+	while (end>=1)
+	{
+		Swap(&a[0], &a[end]);
+		ShiftDown(a, end, 0);
+		--end;
+	}	
+}
+ 
+ 
+int main()
+{
+	int a[] = { 2, 5, 1, 3, 6, 8, 9, 122, 4, 7 };
+	PrintArray(a, 10);
+	HeapSort(a, 10);
+	PrintArray(a, 10);
+	return 0;
+}
